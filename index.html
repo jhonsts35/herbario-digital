@@ -1,0 +1,796 @@
+<!-- index.html
+     Herbario UDigital - Estructura HTML5 semántica
+     Conecta a styles.css y script.js
+-->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Herbario Digital</title>
+  <meta name="description" content="Herbario Digital - Explora la biodiversidad vegetal de Colombia" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Leaflet CSS para mapa interactivo -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+  <a id="top"></a>
+  <!-- Header / Navegación fija -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <div class="logo">Herbario Digital</div>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span class="burger"></span>
+      </button>
+      <nav class="main-nav" role="navigation" aria-label="Menú principal">
+        <ul>
+          <li><a href="#inicio" class="nav-link">Inicio</a></li>
+          <li><a href="#plantas" class="nav-link">Plantas</a></li>
+          <li><a href="#mapa" class="nav-link">Mapa</a></li>
+          <li><a href="#familias" class="nav-link">Familias</a></li>
+          <li><a href="#creditos" class="nav-link">Créditos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero / Presentación -->
+    <section id="inicio" class="hero" aria-labelledby="hero-title">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <h1 id="hero-title">Herbario Digital</h1>
+        <p class="hero-sub">Explora la biodiversidad vegetal de Colombia</p>
+        <p class="hero-meta">Estudiante: <strong>Jhonger Sadkiel Torres Silva</strong> · Profesor: <strong>Carlos Andres Orjuela</strong></p>
+        <div class="hero-actions">
+          <button class="btn primary" id="explorar-plantas">Explorar las Plantas</button>
+          <a href="#mapa" class="btn ghost">Ver el Mapa</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Plantas con Tabs -->
+    <section id="plantas" class="plants-section" aria-labelledby="plants-title">
+      <div class="container">
+        <h2 id="plants-title">Plantas</h2>
+        <div class="tabs" role="tablist" aria-label="Categorías de plantas">
+          <div class="tab-triggers" role="tablist">
+            <button class="tab-btn active" data-tab="medicinales" role="tab" aria-selected="true">Plantas Medicinales</button>
+            <button class="tab-btn" data-tab="ornamentales" role="tab" aria-selected="false">Plantas Ornamentales</button>
+            <button class="tab-btn" data-tab="frutales" role="tab" aria-selected="false">Plantas Frutales</button>
+          </div>
+
+          <div class="tab-panels">
+            <!-- Medicinales -->
+            <div class="tab-panel active" id="medicinales" role="tabpanel">
+              <div class="cards-grid">
+                <!-- Manzanilla -->
+                <article class="card" data-plant="manzanilla" data-category="medicinal">
+                  <figure>
+                    <img src="imagenes/manzanilla.jpg" alt="Manzanilla (Matricaria chamomilla)" loading="lazy">
+                    <figcaption>
+                      <h3>Manzanilla <em>Matricaria chamomilla</em></h3>
+                      <p>Infusión calmante, usada para digestiones y relajación. Habitat: campos y jardines.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="manzanilla">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+                <!-- Mango -->
+                <article class="card" data-plant="mango" data-category="frutal">
+                  <figure>
+                    <img src="imagenes/mango.jpg" alt="Mango (Mangifera indica)" loading="lazy">
+                    <figcaption>
+                      <h3>Mango <em>Mangifera indica</em></h3>
+                      <p>Fruta tropical ampliamente cultivada y consumida en Colombia.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="mango">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Banano -->
+                <article class="card" data-plant="banano" data-category="frutal">
+                  <figure>
+                    <img src="imagenes/banano.jpg" alt="Banano (Musa spp.)" loading="lazy">
+                    <figcaption>
+                      <h3>Banano <em>Musa spp.</em></h3>
+                      <p>Principal cultivo de exportación y consumo local; muy difundido en regiones cálidas.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="banano">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Naranjo (árbol de la naranja) -->
+                <article class="card" data-plant="naranja" data-category="frutal">
+                  <figure>
+                    <img src="imagenes/naranjo.jpg" alt="Naranjo (Citrus sinensis)" loading="lazy">
+                    <figcaption>
+                      <h3>Naranjo <em>Citrus sinensis</em></h3>
+                      <p>Árbol cítrico ampliamente cultivado para fruta y producción de jugos.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="naranja">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Papayo (árbol de la papaya) -->
+                <article class="card" data-plant="papaya" data-category="frutal">
+                  <figure>
+                    <img src="imagenes/papayo.jpg" alt="Papayo (Carica papaya)" loading="lazy">
+                    <figcaption>
+                      <h3>Papayo <em>Carica papaya</em></h3>
+                      <p>Árbol tropical que produce la papaya; cultivado en regiones cálidas y húmedas.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="papaya">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Piña -->
+                <article class="card" data-plant="pina" data-category="frutal">
+                  <figure>
+                    <img src="imagenes/piña.jpg" alt="Piña (Ananas comosus)" loading="lazy">
+                    <figcaption>
+                      <h3>Piña <em>Ananas comosus</em></h3>
+                      <p>Fruta tropical con cultivo comercial en regiones cálidas.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="pina">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Mora -->
+                <article class="card" data-plant="mora" data-category="frutal">
+                  <figure>
+                    <img src="imagenes/mora.jpg" alt="Mora (Rubus glaucus)" loading="lazy">
+                    <figcaption>
+                      <h3>Mora <em>Rubus glaucus</em></h3>
+                      <p>Fruto típico andino, usado en jugos y postres.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="mora">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Tomate de árbol -->
+                <article class="card" data-plant="tomate_arbol" data-category="frutal">
+                  <figure>
+                    <img src="imagenes/tomate de arbol.jpg" alt="Tomate de árbol (Cyphomandra betacea)" loading="lazy">
+                    <figcaption>
+                      <h3>Tomate de árbol <em>Cyphomandra betacea</em></h3>
+                      <p>Fruto andino usado en jugos y salsas; cultivo en zonas templadas.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="tomate_arbol">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Cacao -->
+                <article class="card" data-plant="cacao" data-category="frutal">
+                  <figure>
+                    <img src="imagenes/cacao.jpeg" alt="Cacao (Theobroma cacao)" loading="lazy">
+                    <figcaption>
+                      <h3>Cacao <em>Theobroma cacao</em></h3>
+                      <p>Planta productora de cacao; importante en cultivos tropicales de Colombia.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="cacao">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Aguacate -->
+                <article class="card" data-plant="aguacate" data-category="frutal">
+                  <figure>
+                    <img src="imagenes/aguacate.jpg" alt="Aguacate (Persea americana)" loading="lazy">
+                    <figcaption>
+                      <h3>Aguacate <em>Persea americana</em></h3>
+                      <p>Fruto ampliamente cultivado y consumido; presente en muchas regiones del país.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="aguacate">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+                <!-- Bromelia -->
+                <article class="card" data-plant="bromelia" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/bromelia.avif" alt="Bromelia" loading="lazy">
+                    <figcaption>
+                      <h3>Bromelia <em>Bromeliaceae</em></h3>
+                      <p>Plantas tropicales con brácteas llamativas, comunes en jardines y bosques.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="bromelia">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Guzmania -->
+                <article class="card" data-plant="guzmania" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/guzmania.jpeg" alt="Guzmania" loading="lazy">
+                    <figcaption>
+                      <h3>Guzmania <em>Bromeliaceae</em></h3>
+                      <p>Ornamental de interior con flores tubulares y colores vivos.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="guzmania">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Ixora -->
+                <article class="card" data-plant="ixora" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/Ixora.jpg" alt="Ixora" loading="lazy">
+                    <figcaption>
+                      <h3>Ixora <em>Rubiaceae</em></h3>
+                      <p>Arbusto de flores en racimos, usado en setos y jardines tropicales.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="ixora">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Plumeria (Frangipani) -->
+                <article class="card" data-plant="plumeria" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/plumeria.jpeg" alt="Plumeria" loading="lazy">
+                    <figcaption>
+                      <h3>Plumeria <em>Plumeria spp.</em></h3>
+                      <p>Árbol pequeño con flores fragantes, popular en climas cálidos.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="plumeria">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Hibiscus -->
+                <article class="card" data-plant="hibiscus" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/Hibiscus.jpg" alt="Hibiscus" loading="lazy">
+                    <figcaption>
+                      <h3>Hibiscus <em>Hibiscus spp.</em></h3>
+                      <p>Flores grandes y vistosas, muy usadas en jardinería y jardines costeros.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="hibiscus">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Strelitzia -->
+                <article class="card" data-plant="strelitzia" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/Strelitzia.jpg" alt="Strelitzia" loading="lazy">
+                    <figcaption>
+                      <h3>Strelitzia <em>Strelitzia</em></h3>
+                      <p>Conocida como ave del paraíso; efecto escultórico en jardines.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="strelitzia">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Philodendron -->
+                <article class="card" data-plant="philodendron" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/Philodendron.jpg" alt="Philodendron" loading="lazy">
+                    <figcaption>
+                      <h3>Philodendron <em>Araceae</em></h3>
+                      <p>Plantas de follaje grandes, populares en interiores y jardines sombreados.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="philodendron">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Ficus -->
+                <article class="card" data-plant="ficus" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/Ficus.jpg" alt="Ficus" loading="lazy">
+                    <figcaption>
+                      <h3>Ficus <em>Ficus spp.</em></h3>
+                      <p>Árboles y plantas de sombra usados en parques y plazas urbanas.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="ficus">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Agapanthus -->
+                <article class="card" data-plant="agapanthus" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/Agapanthus.jpg" alt="Agapanthus" loading="lazy">
+                    <figcaption>
+                      <h3>Agapanthus <em>Agapanthus spp.</em></h3>
+                      <p>Planta con flores en umbela, usada en borduras y macizos.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="agapanthus">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Gardenia -->
+                <article class="card" data-plant="gardenia" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/Gardenia.jpg" alt="Gardenia" loading="lazy">
+                    <figcaption>
+                      <h3>Gardenia <em>Gardenia spp.</em></h3>
+                      <p>Arbusto de flores perfumadas, apreciado en jardinería ornamental.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="gardenia">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+                <!-- Uña de gato -->
+                <article class="card" data-plant="uncaria" data-category="medicinal">
+                  <figure>
+                    <img src="imagenes/Uña de gato.avif" alt="Uña de gato (Uncaria tomentosa)" loading="lazy">
+                    <figcaption>
+                      <h3>Uña de gato <em>Uncaria tomentosa</em></h3>
+                      <p>Planta medicinal amazónica usada en remedios tradicionales y como antiinflamatorio.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="uncaria">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Paico -->
+                <article class="card" data-plant="paico" data-category="medicinal">
+                  <figure>
+                    <img src="imagenes/Paico.jpg" alt="Paico (Dysphania ambrosioides)" loading="lazy">
+                    <figcaption>
+                      <h3>Paico <em>Dysphania ambrosioides</em></h3>
+                      <p>Hierba usada tradicionalmente para problemas digestivos y parasitarios.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="paico">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Menta -->
+                <article class="card" data-plant="menta" data-category="medicinal">
+                  <figure>
+                    <img src="imagenes/Menta.jpg" alt="Menta (Mentha)" loading="lazy">
+                    <figcaption>
+                      <h3>Menta <em>Mentha</em></h3>
+                      <p>Aromaticas usadas en infusiones para alivio digestivo y aromaterapia.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="menta">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Boldo -->
+                <article class="card" data-plant="boldo" data-category="medicinal">
+                  <figure>
+                    <img src="imagenes/Boldo.jpg" alt="Boldo" loading="lazy">
+                    <figcaption>
+                      <h3>Boldo <em>Plectranthus spp.</em></h3>
+                      <p>Planta medicinal utilizada en infusiones para problemas hepáticos y digestivos.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="boldo">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Tila -->
+                <article class="card" data-plant="tila" data-category="medicinal">
+                  <figure>
+                    <img src="imagenes/Tila.jpg" alt="Tila" loading="lazy">
+                    <figcaption>
+                      <h3>Tila <em>Tilia</em></h3>
+                      <p>Usada en infusiones para calmar nervios y ayudar al sueño.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="tila">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Valeriana -->
+                <article class="card" data-plant="valeriana" data-category="medicinal">
+                  <figure>
+                    <img src="imagenes/Valeriana.jpg" alt="Valeriana (Valeriana officinalis)" loading="lazy">
+                    <figcaption>
+                      <h3>Valeriana <em>Valeriana officinalis</em></h3>
+                      <p>Planta usada para aliviar insomnio y ansiedad en remedios tradicionales.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="valeriana">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Cola de caballo -->
+                <article class="card" data-plant="cola_caballo" data-category="medicinal">
+                  <figure>
+                    <img src="imagenes/Cola de caballo.jpg" alt="Cola de caballo (Equisetum)" loading="lazy">
+                    <figcaption>
+                      <h3>Cola de caballo <em>Equisetum</em></h3>
+                      <p>Usada en infusiones para propiedades diuréticas y cuidado de la piel.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="cola_caballo">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Llantén -->
+                <article class="card" data-plant="llanten" data-category="medicinal">
+                  <figure>
+                    <img src="imagenes/Llantén.avif" alt="Llantén (Plantago)" loading="lazy">
+                    <figcaption>
+                      <h3>Llantén <em>Plantago</em></h3>
+                      <p>Planta común con propiedades antiinflamatorias y para la tos.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="llanten">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Achiote -->
+                <article class="card" data-plant="achiote" data-category="medicinal">
+                  <figure>
+                    <img src="imagenes/Achiote.webp" alt="Achiote (Bixa orellana)" loading="lazy">
+                    <figcaption>
+                      <h3>Achiote <em>Bixa orellana</em></h3>
+                      <p>Usado como colorante y en remedios tradicionales. Habitat: zonas tropicales y riberas.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="achiote">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Romero -->
+                <article class="card" data-plant="romero" data-category="medicinal">
+                  <figure>
+                    <img src="imagenes/Romero.jpg" alt="Romero (Rosmarinus officinalis)" loading="lazy">
+                    <figcaption>
+                      <h3>Romero <em>Rosmarinus officinalis</em></h3>
+                      <p>Planta aromática, estimulante y digestiva. Habitat: jardines y climas templados.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="romero">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Albahaca -->
+                <article class="card" data-plant="albahaca" data-category="medicinal">
+                  <figure>
+                    <img src="imagenes/Albahaca.webp" alt="Albahaca (Ocimum basilicum)" loading="lazy">
+                    <figcaption>
+                      <h3>Albahaca <em>Ocimum basilicum</em></h3>
+                      <p>Usada en cocina y en infusiones para propiedades digestivas y aromáticas.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="albahaca">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Sábila / Aloe vera -->
+                <article class="card" data-plant="aloe" data-category="medicinal">
+                  <figure>
+                    <img src="imagenes/Sábila (Aloe).jpg" alt="Sábila / Aloe vera" loading="lazy">
+                    <figcaption>
+                      <h3>Sábila <em>Aloe vera</em></h3>
+                      <p>Gel ampliamente utilizado para quemaduras y cuidado de la piel. Habitat: zonas secas y jardines.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="aloe">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+              </div>
+            </div>
+
+            <!-- Ornamentales -->
+            <div class="tab-panel" id="ornamentales" role="tabpanel" hidden>
+              <div class="cards-grid">
+                <!-- Cattleya trianae -->
+                <article class="card" data-plant="cattleya" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/Cattleya trianae.webp" alt="Cattleya trianae (Orquídea)" loading="lazy">
+                    <figcaption>
+                      <h3>Cattleya trianae <em>Orchidaceae</em></h3>
+                      <p>Orquídea emblemática de Colombia. Habitat: bosques nublados y selvas montanas.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="cattleya">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Heliconia -->
+                <article class="card" data-plant="heliconia" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/Heliconia.jpg" alt="Heliconia" loading="lazy">
+                    <figcaption>
+                      <h3>Heliconia <em>Heliconiaceae</em></h3>
+                      <p>Planta tropical vistosa, usada en jardinería y parques. Habitat: selvas y zonas húmedas.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="heliconia">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Anturio -->
+                <article class="card" data-plant="anturio" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/Anturio.webp" alt="Anturio (Anthurium andraeanum)" loading="lazy">
+                    <figcaption>
+                      <h3>Anturio <em>Anthurium andraeanum</em></h3>
+                      <p>Popular en floristería por sus brácteas. Habitat: bosques húmedos y cultivados.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="anturio">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Caléndula -->
+                <article class="card" data-plant="calendula" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/Caléndula.jpg" alt="Caléndula (Calendula officinalis)" loading="lazy">
+                    <figcaption>
+                      <h3>Caléndula <em>Calendula officinalis</em></h3>
+                      <p>Flores brillantes usadas en cultivo ornamental y remedios tradicionales.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="calendula">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Bougainvillea -->
+                <article class="card" data-plant="bougainvillea" data-category="ornamental">
+                  <figure>
+                    <img src="imagenes/Bougainvillea.webp" alt="Bougainvillea" loading="lazy">
+                    <figcaption>
+                      <h3>Bougainvillea <em>Bougainvillea spp.</em></h3>
+                      <p>Trepadora ornamental de coloridas brácteas; resistente y popular en climas cálidos.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="bougainvillea">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+              </div>
+            </div>
+
+            <!-- Frutales -->
+            <div class="tab-panel" id="frutales" role="tabpanel" hidden>
+              <div class="cards-grid">
+                <!-- Lulo -->
+                <article class="card" data-plant="lulo" data-category="frutal">
+                  <figure>
+                    <img src="imagenes/Lulo.jpg" alt="Lulo (Solanum quitoense)" loading="lazy">
+                    <figcaption>
+                      <h3>Lulo <em>Solanum quitoense</em></h3>
+                      <p>Fruta ácida y aromática, base en jugos y postres en la región andina.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="lulo">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Uchuva -->
+                <article class="card" data-plant="uchuva" data-category="frutal">
+                  <figure>
+                    <img src="imagenes/Uchuva.webp" alt="Uchuva (Physalis peruviana)" loading="lazy">
+                    <figcaption>
+                      <h3>Uchuva <em>Physalis peruviana</em></h3>
+                      <p>Fruto pequeño, dulce-acidulado; cultivado en climas templados y fríos.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="uchuva">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Gulupa / Maracuyá (passiflora) -->
+                <article class="card" data-plant="gulupa" data-category="frutal">
+                  <figure>
+                    <img src="imagenes/Gulupa.jpg" alt="Gulupa / Maracuyá (Passiflora edulis)" loading="lazy">
+                    <figcaption>
+                      <h3>Gulupa / Maracuyá <em>Passiflora edulis</em></h3>
+                      <p>Fruta aromática usada en jugos y postres; crece en zonas tropicales y andinas.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="gulupa">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Guanábana -->
+                <article class="card" data-plant="guanabana" data-category="frutal">
+                  <figure>
+                    <img src="imagenes/Guanábana.jpg" alt="Guanábana (Annona muricata)" loading="lazy">
+                    <figcaption>
+                      <h3>Guanábana <em>Annona muricata</em></h3>
+                      <p>Fruta grande y aromática, cultivada en trópicos para consumo fresco y jugos.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="guanabana">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+
+                <!-- Guayaba -->
+                <article class="card" data-plant="guayaba" data-category="frutal">
+                  <figure>
+                    <img src="imagenes/Guayaba.jpg" alt="Guayaba (Psidium guajava)" loading="lazy">
+                    <figcaption>
+                      <h3>Guayaba <em>Psidium guajava</em></h3>
+                      <p>Popular fruto tropical, fuente de vitamina C; cultivada ampliamente en Colombia.</p>
+                      <div class="card-actions">
+                        <button class="pin-btn" aria-label="Ver en mapa" data-plant="guayaba">📍</button>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </article>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Mapa -->
+    <section id="mapa" class="map-section" aria-labelledby="mapa-title">
+      <div class="container">
+        <h2 id="mapa-title">Ubicación de las Especies en Colombia</h2>
+        <p class="muted">Marcadores aproximados en ciudades/regiones representativas.</p>
+
+        <div class="map-wrapper">
+          <!-- Mapa interactivo con Leaflet -->
+          <div id="map" aria-label="Mapa de Colombia" role="region"></div>
+        </div>
+
+        <!-- Contenedor para mostrar información de planta cuando se selecciona desde una tarjeta -->
+        <div id="map-info" class="map-info" hidden></div>
+      </div>
+    </section>
+
+    <!-- Sección Clasificación por Familias -->
+    <section id="familias" class="families-section" aria-labelledby="families-title">
+      <div class="container">
+        <h2 id="families-title">Clasificación Taxonómica</h2>
+
+        <!-- Acordeones por familia -->
+        <div class="families-accordion">
+          <details>
+            <summary>Asteraceae</summary>
+            <ul>
+              <li>Manzanilla — <em>Matricaria chamomilla</em></li>
+              <li>Caléndula — <em>Calendula officinalis</em></li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Lamiaceae</summary>
+            <ul>
+              <li>Romero — <em>Rosmarinus officinalis</em></li>
+              <li>Albahaca — <em>Ocimum basilicum</em></li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Annonaceae</summary>
+            <ul>
+              <li>Guanábana — <em>Annona muricata</em></li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Passifloraceae</summary>
+            <ul>
+              <li>Gulupa / Maracuyá — <em>Passiflora edulis</em></li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Solanaceae</summary>
+            <ul>
+              <li>Lulo — <em>Solanum quitoense</em></li>
+              <li>Uchuva — <em>Physalis peruviana</em></li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Myrtaceae</summary>
+            <ul>
+              <li>Guayaba — <em>Psidium guajava</em></li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Araceae</summary>
+            <ul>
+              <li>Anturio — <em>Anthurium andraeanum</em></li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Orchidaceae</summary>
+            <ul>
+              <li>Cattleya trianae — <em>Cattleya trianae</em></li>
+            </ul>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Créditos / Footer -->
+    <footer id="creditos" class="site-footer" role="contentinfo">
+      <div class="container footer-inner">
+        <p>Herbario Digital – Jhonger Sadkie Torres Silva – La mesa, Cundinamarca, Colombia – 2026</p>
+        <nav class="footer-nav" aria-label="Enlaces del pie">
+          <a href="#inicio">Inicio</a>
+          <a href="#plantas">Plantas</a>
+          <a href="#mapa">Mapa</a>
+          <a href="#familias">Familias</a>
+        </nav>
+        <p class="muted">Profesor: Carlos Andres Orjuela · Institución: FRANCISCO JULIAN OLAYA</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Leaflet JS (mapas OpenStreetMap) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+
+  <!-- Modal para detalles de planta -->
+  <div id="plant-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel">
+      <button class="modal-close" aria-label="Cerrar" data-close>✕</button>
+      <div class="modal-body">
+        <figure class="modal-figure">
+          <img id="modal-img" src="" alt="" />
+          <figcaption>
+            <h3 id="modal-title">Nombre común <em id="modal-sci"></em></h3>
+            <p id="modal-family" class="muted">Familia: —</p>
+          </figcaption>
+        </figure>
+        <div id="modal-details">
+          <p id="modal-desc"></p>
+          <ul id="modal-extra"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
